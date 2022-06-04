@@ -5,6 +5,7 @@ namespace HOSPICE_PROJEKT
 {
     public partial class VisitorsDatum
     {
+        
         public int VisitId { get; set; }
         public int PatientId { get; set; }
         public string Name { get; set; } = null!;

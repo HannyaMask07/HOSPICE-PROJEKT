@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace HOSPICE_PROJEKT
 {
@@ -13,5 +14,11 @@ namespace HOSPICE_PROJEKT
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            DatabaseFacade facade = new DatabaseFacade(new HospiceDataBaseContext());
+            facade.EnsureCreated();
+
+        }
     }
 }

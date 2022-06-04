@@ -21,13 +21,11 @@ namespace HOSPICE_PROJEKT
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        public List<VisitorsDatum> DatabaseVisitors { get; private set; }
+
         public MainWindow()
         {
-            InitializeComponent();
-
-
-            
+            InitializeComponent();           
         }
 
         public void Create()
@@ -36,29 +34,103 @@ namespace HOSPICE_PROJEKT
             {
                 var name = NameTextBox.Text;
                 var surname = SurnameTextBox.Text;
-                var patientId = ;
-                var degofkinship = ;
-                var phonenumber = ;
-                context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname });
+                int patientId = Convert.ToInt32(PatientIDTextBox.Text);
+                var degofkinship = DegofkinshipTextBox.Text;
+                var phonenumber = PhoneNrTextBox.Text;
+
+                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+                {
+                    context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientId, PhoneNumber = phonenumber });
+                    context.SaveChanges();
+                }
+
             }
         }
 
         public void Read()
         {
-
+            using (HospiceDataBaseContext context = new HospiceDataBaseContext())
+            {
+               DatabaseVisitors = context.VisitorsData.ToList();
+                ItemList.ItemsSource = DatabaseVisitors;
+            }
         }
 
         public void Update()
         {
+            using (HospiceDataBaseContext context = new HospiceDataBaseContext())
+            {
+
+                VisitorsDatum selectedVisitor = ItemList.SelectedItem as VisitorsDatum;
+
+                var name = NameTextBox.Text;
+                var surname = SurnameTextBox.Text;
+                int patientId = Convert.ToInt32(PatientIDTextBox.Text);
+                var degofkinship = DegofkinshipTextBox.Text;
+                var phonenumber = PhoneNrTextBox.Text;
+
+                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+                {
+                   VisitorsDatum? visitor = context.VisitorsData.Find(selectedVisitor.VisitId);
+
+                    visitor.Name = name;
+                    visitor.Surname = surname;
+                    visitor.PatientId = patientId;
+                    visitor.DegOfKinship = degofkinship;
+                    visitor.PhoneNumber = phonenumber;
+                    context.SaveChanges();
+
+                }
+
+            }
 
         }
 
         public void Delete()
         {
 
+            using (HospiceDataBaseContext context = new HospiceDataBaseContext())
+            {
+                VisitorsDatum selectedVisitor = (VisitorsDatum)ItemList.SelectedItem;
+
+                if (selectedVisitor != null)
+                {
+                    VisitorsDatum? visitor = context.VisitorsData.Find(selectedVisitor.VisitId);
+
+
+                    context.Remove(visitor);
+                    context.SaveChanges();
+
+                }
+              
+
+            }
+
         }
 
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Create();
+        }
 
-       
+        private void ReadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Read();
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Delete();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ItemList.Items.Clear();
+        }
     }
 }

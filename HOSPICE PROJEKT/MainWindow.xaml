@@ -16,12 +16,12 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="30"  DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Id" Width="30"  DisplayMemberBinding="{Binding VisitId}"/>
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Surname" Width="150" DisplayMemberBinding="{Binding Surname}"/>
-                    <GridViewColumn Header="PatientID" Width="150" DisplayMemberBinding="{Binding PatientID}"/>
-                    <GridViewColumn Header="Kinship" Width="150" DisplayMemberBinding="{Binding Kinship}"/>
-                    <GridViewColumn Header="PhoneNr" Width="150" DisplayMemberBinding="{Binding PhoneNr}"/>
+                    <GridViewColumn Header="PatientID" Width="150" DisplayMemberBinding="{Binding PatientId}"/>
+                    <GridViewColumn Header="Kinship" Width="150" DisplayMemberBinding="{Binding DegOfKinship}"/>
+                    <GridViewColumn Header="PhoneNr" Width="150" DisplayMemberBinding="{Binding PhoneNumber}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -35,10 +35,10 @@
             <Label Content="Deg.of Kinship" HorizontalAlignment="Left" Margin="3,120,0,0"/>
             <Label Content="Phone Nr" HorizontalAlignment="Left" Margin="3,160,0,0"/>
             <TextBox Name="NameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Name,Mode=OneWay}" HorizontalAlignment="Left"  Margin="100,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="SurnameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Surname,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="PatientIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PatientID,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="DegofkinshipTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Kinship,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,120,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="PhoneNrTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PhoneNr,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,160,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="SurnameTextBox" Text="{Binding ElementName=ItemList, Path=SelectedItem.Surname,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="PatientIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PatientId,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="DegofkinshipTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.DegOfKinship,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,120,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="PhoneNrTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PhoneNumber,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,160,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
 
         </Grid>
 
