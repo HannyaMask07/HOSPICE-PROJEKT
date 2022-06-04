@@ -42,6 +42,7 @@ namespace HOSPICE_PROJEKT
                 {
                     context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientId, PhoneNumber = phonenumber });
                     context.SaveChanges();
+                    Read();
                 }
 
             }
@@ -79,6 +80,7 @@ namespace HOSPICE_PROJEKT
                     visitor.DegOfKinship = degofkinship;
                     visitor.PhoneNumber = phonenumber;
                     context.SaveChanges();
+                    Read();
 
                 }
 
@@ -100,6 +102,7 @@ namespace HOSPICE_PROJEKT
 
                     context.Remove(visitor);
                     context.SaveChanges();
+                    Read();
 
                 }
               
