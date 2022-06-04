@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace HOSPICE_PROJEKT
 {
     /// <summary>
@@ -20,11 +21,44 @@ namespace HOSPICE_PROJEKT
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+
+
+            
         }
-        
+
+        public void Create()
+        {
+            using (HospiceDataBaseContext context = new HospiceDataBaseContext())
+            {
+                var name = NameTextBox.Text;
+                var surname = SurnameTextBox.Text;
+                var patientId = ;
+                var degofkinship = ;
+                var phonenumber = ;
+                context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname });
+            }
+        }
+
+        public void Read()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public void Delete()
+        {
+
+        }
+
+
        
     }
 }
