@@ -139,11 +139,10 @@ namespace HOSPICE_PROJEKT
         {
             ItemList.Items.Clear();
         }
-
-        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+        private void Grid_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow win = new MainWindow();
-            win.Show();
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

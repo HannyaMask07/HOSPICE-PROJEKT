@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -16,30 +17,29 @@ using System.Windows.Shapes;
 namespace HOSPICE_PROJEKT.Pages
 {
     /// <summary>
-    /// Logika interakcji dla klasy Visitors.xaml
+    /// Logika interakcji dla klasy DeathDate.xaml
     /// </summary>
-    public partial class Visitors : Page
+    public partial class DeathDate : Page
     {
-        public Visitors()
+        public DeathDate()
         {
             InitializeComponent();
             Read();
         }
-        public List<VisitorsDatum> DatabaseVisitors { get; private set; }
 
+        public List<PatientsDeathDate> DatabaseDeathDate { get; private set; }
         public void Create()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                var name = NameTextBox.Text;
-                var surname = SurnameTextBox.Text;
-                int patientId = Convert.ToInt32(PatientIDTextBox.Text);
-                var degofkinship = DegofkinshipTextBox.Text;
-                var phonenumber = PhoneNrTextBox.Text;
+                var patientID = int.Parse(PatientIdTextBox.Text);
+                var deathDate = DeathDateTextBox.SelectedDate;
+                var causeOfDeath = CauseOfDeathTextBox.Text; 
+                
 
-                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+                if (deathDate != null && causeOfDeath != null)
                 {
-                    context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientId, PhoneNumber = phonenumber });
+                    context.PatientsDeathDates.Add(new PatientsDeathDate() { PatientId = patientID, DeathDate = (DateTime)deathDate, CauseOfDeath = causeOfDeath  }); ;
                     context.SaveChanges();
                     Read();
                 }
@@ -51,8 +51,8 @@ namespace HOSPICE_PROJEKT.Pages
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                DatabaseVisitors = context.VisitorsData.ToList();
-                ItemList.ItemsSource = DatabaseVisitors;
+                DatabaseDeathDate = context.PatientsDeathDates.ToList();
+                ItemList.ItemsSource = DatabaseDeathDate;
             }
         }
 
@@ -61,23 +61,20 @@ namespace HOSPICE_PROJEKT.Pages
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
 
-                VisitorsDatum selectedVisitor = ItemList.SelectedItem as VisitorsDatum;
+                PatientsDeathDate selectedPatient = ItemList.SelectedItem as PatientsDeathDate;
 
-                var name = NameTextBox.Text;
-                var surname = SurnameTextBox.Text;
-                int patientId = Convert.ToInt32(PatientIDTextBox.Text);
-                var degofkinship = DegofkinshipTextBox.Text;
-                var phonenumber = PhoneNrTextBox.Text;
+                var patientID = int.Parse(PatientIdTextBox.Text);
+                var deathDate = DeathDateTextBox.SelectedDate;
+                var causeOfDeath = CauseOfDeathTextBox.Text;
 
-                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+                if (deathDate != null && causeOfDeath != null)
                 {
-                    VisitorsDatum? visitor = context.VisitorsData.Find(selectedVisitor.VisitId);
+                    PatientsDeathDate? patient = context.PatientsDeathDates.Find(selectedPatient.PatientId);
 
-                    visitor.Name = name;
-                    visitor.Surname = surname;
-                    visitor.PatientId = patientId;
-                    visitor.DegOfKinship = degofkinship;
-                    visitor.PhoneNumber = phonenumber;
+                    patient.PatientId = patientID;
+                    patient.DeathDate = (DateTime)deathDate;
+                    patient.CauseOfDeath = causeOfDeath;
+                    
                     context.SaveChanges();
                     Read();
 
@@ -92,14 +89,14 @@ namespace HOSPICE_PROJEKT.Pages
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                VisitorsDatum selectedVisitor = (VisitorsDatum)ItemList.SelectedItem;
+                PatientsPersonalDatum selectedPatient = (PatientsPersonalDatum)ItemList.SelectedItem;
 
-                if (selectedVisitor != null)
+                if (selectedPatient != null)
                 {
-                    VisitorsDatum? visitor = context.VisitorsData.Find(selectedVisitor.VisitId);
+                    PatientsDeathDate? patient = context.PatientsDeathDates.Find(selectedPatient.PatientId);
 
 
-                    context.Remove(visitor);
+                    context.Remove(patient);
                     context.SaveChanges();
                     Read();
 

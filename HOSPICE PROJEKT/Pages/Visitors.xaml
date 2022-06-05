@@ -73,5 +73,12 @@
             </StackPanel>
         </Button>
 
+        <Grid ButtonBase.Click="Grid_Click" Margin="265,352,10,10">
+            <WrapPanel Margin="5">
+                <n:NavButton Text="Patient Info." ImageSource="/Images/Patient.png" NavUri="/Pages/Page1.xaml"/>
+                <n:NavButton Text="Patient Death Date" ImageSource="/Images/DeathDate.png" NavUri="/Pages/DeathDate.xaml"/>
+            </WrapPanel>
+        </Grid>
+
     </Grid>
 </Page>

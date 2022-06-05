@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\DeathDate.png" />
     <None Remove="Images\infobutton.png" />
     <None Remove="Images\menu.png" />
     <None Remove="Images\Patient.png" />
@@ -16,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\DeathDate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\infobutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
