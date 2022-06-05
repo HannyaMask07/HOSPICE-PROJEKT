@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,32 +16,30 @@ using System.Windows.Shapes;
 namespace HOSPICE_PROJEKT.Pages
 {
     /// <summary>
-    /// Logika interakcji dla klasy DeathDate.xaml
+    /// Logika interakcji dla klasy PatientAdress.xaml
     /// </summary>
-    public partial class DeathDate : Page
+    public partial class PatientBeds : Page
     {
-        public DeathDate()
+        public List<HospiceRoom> HospiceRoomsList { get; private set; }
+
+        public PatientBeds()
         {
             InitializeComponent();
             Read();
         }
 
-        public List<PatientsDeathDate> DatabaseDeathDate { get; private set; }
         public void Create()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                var patientID = int.Parse(PatientIdTextBox.Text);
-                var deathDate = DeathDateTextBox.SelectedDate;
-                var causeOfDeath = CauseOfDeathTextBox.Text; 
-                
+                var bedId = int.Parse(BedIdTextBox.Text);
+                var patientId = int.Parse(PatientIdTextBox.Text);
+                var roomNr = int.Parse(RoomNrTextBox.Text);
 
-                if (deathDate != null && causeOfDeath != null)
-                {
-                    context.PatientsDeathDates.Add(new PatientsDeathDate() { PatientId = patientID, DeathDate = (DateTime)deathDate, CauseOfDeath = causeOfDeath  }); ;
-                    context.SaveChanges();
-                    Read();
-                }
+                context.HospiceRooms.Add(new HospiceRoom() { BedId = (short)bedId, PatientId = patientId, RoomNr = (short)roomNr }); ;
+                context.SaveChanges();
+                Read();
+
 
             }
         }
@@ -51,8 +48,8 @@ namespace HOSPICE_PROJEKT.Pages
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                DatabaseDeathDate = context.PatientsDeathDates.ToList();
-                ItemList.ItemsSource = DatabaseDeathDate;
+                HospiceRoomsList = context.HospiceRooms.ToList();
+                ItemList.ItemsSource = HospiceRoomsList;
             }
         }
 
@@ -61,24 +58,22 @@ namespace HOSPICE_PROJEKT.Pages
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
 
-                PatientsDeathDate selectedPatient = ItemList.SelectedItem as PatientsDeathDate;
+                HospiceRoom selectedBed = ItemList.SelectedItem as HospiceRoom;
 
-                var patientID = int.Parse(PatientIdTextBox.Text);
-                var deathDate = DeathDateTextBox.SelectedDate;
-                var causeOfDeath = CauseOfDeathTextBox.Text;
+                var bedId = int.Parse(BedIdTextBox.Text);
+                var patientId = int.Parse(PatientIdTextBox.Text);
+                var roomNr = int.Parse(RoomNrTextBox.Text);
 
-                if (deathDate != null && causeOfDeath != null)
-                {
-                    PatientsDeathDate? patient = context.PatientsDeathDates.Find(selectedPatient.PatientId);
+                    HospiceRoom? bed = context.HospiceRooms.Find(selectedBed.BedId);
 
-                    patient.PatientId = patientID;
-                    patient.DeathDate = (DateTime)deathDate;
-                    patient.CauseOfDeath = causeOfDeath;
-                    
+                    bed.BedId = (short)bedId;
+                    bed.PatientId = patientId;
+                    bed.RoomNr = (short)roomNr;
+
                     context.SaveChanges();
                     Read();
 
-                }
+                
 
             }
 
@@ -89,14 +84,14 @@ namespace HOSPICE_PROJEKT.Pages
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-                PatientsDeathDate selectedPatient = (PatientsDeathDate)ItemList.SelectedItem;
+                HospiceRoom selectedBed = (HospiceRoom)ItemList.SelectedItem;
 
-                if (selectedPatient != null)
+                if (selectedBed != null)
                 {
-                    PatientsDeathDate? patient = context.PatientsDeathDates.Find(selectedPatient.PatientId);
+                    HospiceRoom? bed = context.HospiceRooms.Find(selectedBed.BedId);
 
 
-                    context.Remove(patient);
+                    context.Remove(bed);
                     context.SaveChanges();
                     Read();
 
@@ -137,6 +132,5 @@ namespace HOSPICE_PROJEKT.Pages
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
-
     }
 }

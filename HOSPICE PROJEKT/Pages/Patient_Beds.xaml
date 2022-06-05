@@ -1,17 +1,14 @@
-﻿<Page x:Class="HOSPICE_PROJEKT.Pages.DeathDate"
+﻿<Page x:Class="HOSPICE_PROJEKT.Pages.PatientBeds"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HOSPICE_PROJEKT.Pages"
       xmlns:n="clr-namespace:HOSPICE_PROJEKT"
-      
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
-      Title="DeathDate">
-
-    <Grid>
-        <Grid Background="White">
+      Title="PatientAdress">
+    <Grid Background="White">
             <ListView Name="ItemList" Margin="5,20,5,0" Height="195" VerticalAlignment="Top">
                 <ListView.ContextMenu>
                     <ContextMenu>
@@ -20,24 +17,26 @@
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="PatientId" Width="80"  DisplayMemberBinding="{Binding PatientId}"/>
-                        <GridViewColumn Header="DeathDate" Width="150" DisplayMemberBinding="{Binding DeathDate}"/>
-                        <GridViewColumn Header="CauseOfDeath" Width="150" DisplayMemberBinding="{Binding CauseOfDeath}"/>
-                    </GridView>
+                        <GridViewColumn Header="Bed Id" Width="80"  DisplayMemberBinding="{Binding BedId}"/>
+                        <GridViewColumn Header="Patient Id" Width="150" DisplayMemberBinding="{Binding PatientId}"/>
+                        <GridViewColumn Header="Room Nr" Width="150" DisplayMemberBinding="{Binding RoomNr}"/>
+                </GridView>
                 </ListView.View>
             </ListView>
 
             <CheckBox x:Name="EnableCheckBox" Content="Edit"  HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
 
             <Grid x:Name="EditGrid" IsEnabled="{Binding ElementName=EnableCheckBox,Path=IsChecked}" Margin="3,260,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Label Content="Patient Id" HorizontalAlignment="Left" Margin="3,0,0,0"   VerticalAlignment="Top"/>
-                <Label Content="Death date" HorizontalAlignment="Left" Margin="3,40,0,0"/>
-                <Label Content="Cause of death" HorizontalAlignment="Left" Margin="3,80,0,0"/>
-               
-                <TextBox Name="PatientIdTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PatientId,Mode=OneWay}" HorizontalAlignment="Left"  Margin="100,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-                <DatePicker Name="DeathDateTextBox" Text="{Binding ElementName=ItemList, Path=SelectedItem.DeathDate,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-                <TextBox Name="CauseOfDeathTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.CauseOfDeath,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-           </Grid>
+                <Label Content="Bed Id" HorizontalAlignment="Left" Margin="3,0,0,0"   VerticalAlignment="Top"/>
+                <Label Content="Patient Id" HorizontalAlignment="Left" Margin="3,40,0,0"/>
+                <Label Content="Room Nr" HorizontalAlignment="Left" Margin="3,80,0,0"/>
+          
+
+                <TextBox Name="BedIdTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.BedId,Mode=OneWay}" HorizontalAlignment="Left"  Margin="100,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+                <TextBox Name="PatientIdTextBox" Text="{Binding ElementName=ItemList, Path=SelectedItem.PatientId,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+                <TextBox Name="RoomNrTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomNr,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+                
+            </Grid>
 
             <Button x:Name="CreateButton" HorizontalAlignment="Left" Click="CreateButton_Click" Margin="10,730,0,0" VerticalAlignment="Top" >
                 <StackPanel Orientation="Horizontal">
@@ -71,10 +70,11 @@
                 <WrapPanel Margin="5">
                     <n:NavButton Text="Visitor" ImageSource="/Images/Visitors.png" NavUri="/Pages/Visitors.xaml"/>
                     <n:NavButton Text="Patient Info." ImageSource="/Images/Patient.png" NavUri="/Pages/Page1.xaml"/>
-                    <n:NavButton Text="Patient Death Date" ImageSource="/Images/DeathDate_Selected.png" NavUri="/Pages/DeathDate.xaml"/>
-                    <n:NavButton Text="Patient Room" ImageSource="/Images/Patient_Bed.png" NavUri="/Pages/Patient_Beds.xaml"/>
-                </WrapPanel>
+                    <n:NavButton Text="Patient Death Date" ImageSource="/Images/DeathDate.png" NavUri="/Pages/DeathDate.xaml"/>
+                    <n:NavButton Text="Patient Room" ImageSource="/Images/Patient_Bed_Selected.png" NavUri="/Pages/Patient_Beds.xaml"/>
+
+            </WrapPanel>
             </Grid>
-       </Grid>
-    </Grid>
-</Page>
+
+        </Grid>
+    </Page>

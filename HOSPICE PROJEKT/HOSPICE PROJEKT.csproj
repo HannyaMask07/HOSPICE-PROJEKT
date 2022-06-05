@@ -14,6 +14,8 @@
     <None Remove="Images\infobutton.png" />
     <None Remove="Images\menu.png" />
     <None Remove="Images\Patient.png" />
+    <None Remove="Images\Patient_Bed.png" />
+    <None Remove="Images\Patient_Bed_Selected.png" />
     <None Remove="Images\Patient_Selected.png" />
     <None Remove="Images\Visitors.png" />
     <None Remove="Images\Visitors_Selected.png" />
@@ -33,6 +35,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Patient.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Patient_Bed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Patient_Bed_Selected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Patient_Selected.png">

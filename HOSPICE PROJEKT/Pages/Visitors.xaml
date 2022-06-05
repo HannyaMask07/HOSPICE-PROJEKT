@@ -78,6 +78,7 @@
                 <n:NavButton Text="Visitor" ImageSource="/Images/Visitors_Selected.png" NavUri="/Pages/Visitors.xaml"/>
                 <n:NavButton Text="Patient Info." ImageSource="/Images/Patient.png" NavUri="/Pages/Page1.xaml"/>
                 <n:NavButton Text="Patient Death Date" ImageSource="/Images/DeathDate.png" NavUri="/Pages/DeathDate.xaml"/>
+                <n:NavButton Text="Patient Room" ImageSource="/Images/Patient_Bed.png" NavUri="/Pages/Patient_Beds.xaml"/>
             </WrapPanel>
         </Grid>
 
