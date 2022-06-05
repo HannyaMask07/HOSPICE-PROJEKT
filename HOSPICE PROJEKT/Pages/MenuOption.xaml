@@ -1,0 +1,19 @@
+﻿<Page x:Class="HOSPICE_PROJEKT.Pages.MenuOption"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HOSPICE_PROJEKT.Pages"
+      xmlns:n="clr-namespace:HOSPICE_PROJEKT"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MenuOption">
+
+    <Grid Background="White" ButtonBase.Click="Grid_Click">
+        <WrapPanel Margin="5">
+            <n:NavButton Text="Visitor" ImageSource="/Images/Visitors.png" NavUri="/Pages/Visitors.xaml"/>
+            <n:NavButton Text="Patient Info." ImageSource="/Images/Patient.png" NavUri="/Pages/Page1.xaml"/>
+
+        </WrapPanel>
+    </Grid>
+</Page>

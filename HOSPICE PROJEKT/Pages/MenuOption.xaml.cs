@@ -1,33 +1,35 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Controls.Primitives;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace HOSPICE_PROJEKT
+namespace HOSPICE_PROJEKT.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy MenuOption.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuOption : Page
     {
-
-        public MainWindow()
+        public MenuOption()
         {
             InitializeComponent();
-            
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+            var ClickedButton = e.OriginalSource as NavButton;
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }
