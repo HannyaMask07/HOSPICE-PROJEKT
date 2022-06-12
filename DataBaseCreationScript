@@ -1,0 +1,237 @@
+CREATE DATABASE [HospiceDataBase]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_personal_data](
+[Patient_ID] [int] IDENTITY(1,1) NOT NULL,
+[PESEL] [char](11) NULL,
+[Name] [nvarchar](20) NOT NULL,
+[Surname] [nvarchar](20) NOT NULL,
+[Phone_number] [char](15) NULL,
+CONSTRAINT [PK_Patients_personal_data] PRIMARY KEY CLUSTERED
+(
+[Patient_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Visitors_data](
+[Visit_ID] [int] IDENTITY(1,1) NOT NULL,
+[Patient_ID] [int] NOT NULL,
+[Name] [nvarchar](20) NOT NULL,
+[Surname] [nvarchar](20) NOT NULL,
+[Deg_of_kinship] [nvarchar](15) NOT NULL,
+[Phone_number] [char](10) NOT NULL,
+CONSTRAINT [PK_Visitors_data] PRIMARY KEY CLUSTERED
+(
+[Visit_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Visitors_data] WITH CHECK ADD CONSTRAINT [FK_Visitors_data] 
+FOREIGN KEY([Patient_ID])
+REFERENCES [dbo].[Patients_personal_data] ([Patient_ID])
+GO
+ALTER TABLE [dbo].[Visitors_data] CHECK CONSTRAINT [FK_Visitors_data]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_adress_data](
+[Patient_ID] [int] NOT NULL,
+[Street] [nvarchar](30) NOT NULL,
+[Street_nr] [smallint] NOT NULL,
+[Zip_code] [char](10) NOT NULL,
+[Locality] [nvarchar](30) NOT NULL,
+[Flat_nr] [smallint] NOT NULL,
+CONSTRAINT [PK_Patients_adress_data] PRIMARY KEY CLUSTERED
+(
+[Patient_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_death_date](
+[Patient_ID] [int] NOT NULL,
+[Death_date] date CHECK(Death_date <= GETDATE()) NOT NULL,
+[Cause_of_death] [nvarchar](40) NOT NULL,
+CONSTRAINT [PK__Death_date] PRIMARY KEY CLUSTERED
+(
+[Patient_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_condition](
+[Test_ID] [int] IDENTITY(1,1) NOT NULL,
+[Patient_ID] [int] NOT NULL,
+[Condition] [nvarchar](40) NOT NULL,
+CONSTRAINT [PK_Patients_condition] PRIMARY KEY CLUSTERED
+(
+[Test_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Patients_condition] WITH CHECK ADD CONSTRAINT
+[FK_Patients_condition] FOREIGN KEY([Patient_ID])
+REFERENCES [dbo].[Patients_personal_data] ([Patient_ID])
+GO
+ALTER TABLE [dbo].[Patients_condition] CHECK CONSTRAINT [FK_Patients_condition]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_medications](
+[Treatment_ID] [int] IDENTITY(1,1) NOT NULL,
+[Patient_ID] [int] NOT NULL,
+[Medication_ID] [char](10) NOT NULL,
+[Dosage_of_med] [char](10) NOT NULL,
+CONSTRAINT [PK_Patients_medications] PRIMARY KEY CLUSTERED
+(
+[Treatment_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Patients_medications] WITH CHECK ADD CONSTRAINT
+[FK_Patients_medications] FOREIGN KEY([Patient_ID])
+REFERENCES [dbo].[Patients_personal_data] ([Patient_ID])
+GO
+ALTER TABLE [dbo].[Patients_medications] CHECK CONSTRAINT [FK_Patients_medications]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Hospice_rooms](
+[Bed_ID] [smallint] NOT NULL,
+[Patient_ID] [int] UNIQUE NOT NULL,
+[Room_nr] [smallint] NOT NULL,
+CONSTRAINT [PK_Hospice_rooms] PRIMARY KEY CLUSTERED
+(
+[Bed_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Hospice_rooms] WITH CHECK ADD CONSTRAINT [FK_Hospice_rooms] 
+FOREIGN KEY([Patient_ID])
+REFERENCES [dbo].[Patients_personal_data] ([Patient_ID])
+GO
+ALTER TABLE [dbo].[Hospice_rooms] CHECK CONSTRAINT [FK_Hospice_rooms]
+GO
+USE [HospiceDataBase]
+GO
+CREATE TABLE [dbo].[Patients_Fees](
+[Fee_ID] [int] IDENTITY(1,1) NOT NULL,
+[Patient_ID] [int] NOT NULL,
+[Fee_amount] [money] NOT NULL,
+CONSTRAINT [PK_Patients_Fees] PRIMARY KEY CLUSTERED
+(
+[Fee_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON
+[PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Patients_Fees] WITH CHECK ADD CONSTRAINT [FK_Patients_Fees] 
+FOREIGN KEY([Patient_ID])
+REFERENCES [dbo].[Patients_personal_data] ([Patient_ID])
+GO
+ALTER TABLE [dbo].[Patients_Fees] CHECK CONSTRAINT [FK_Patients_Fees]
+GO
+INSERT INTO Patients_personal_data
+VALUES (99081900001, 'Jakub', 'Ptak', 111222331)
+GO
+INSERT INTO Patients_personal_data
+VALUES (99081900002, 'Mariusz', 'Sowa', 111222332)
+GO
+INSERT INTO Patients_personal_data
+VALUES (NULL, 'Janusz', 'Wróbel', NULL)
+GO
+INSERT INTO Visitors_data
+VALUES (1, 'Dawid', 'Warchoł', 'wujek', 100000001)
+GO
+INSERT INTO Visitors_data
+VALUES (3, 'Maciek', 'Bober', 'brat', 100000002)
+GO
+INSERT INTO Visitors_data
+VALUES (2, 'Konrad', 'Kot', 'syn', 100000003)
+GO
+INSERT INTO Visitors_data
+VALUES (2, 'Karolina', 'Kot', 'córka', 100000004)
+GO
+INSERT INTO Patients_adress_data
+VALUES (1, 'Obca', 10 , '33-115', 'Kraków', 322)
+GO
+INSERT INTO Patients_adress_data
+VALUES (3, 'Skośna', 11 ,'22-115', 'Katowice', 114)
+GO
+INSERT INTO Patients_adress_data
+VALUES (2, 'Krakowska', 20 , '11-119', 'Kraków', 110)
+GO
+INSERT INTO Patients_death_date
+VALUES (1,'2021-12-17', 'Zawał')
+GO
+INSERT INTO Patients_death_date
+VALUES (2,'2020-12-17', 'Covid-19')
+GO
+INSERT INTO Patients_death_date
+VALUES (3,'2021-10-17', 'Zawał')
+GO
+INSERT INTO Patients_condition
+VALUES (1,'Ból głowy')
+GO
+INSERT INTO Patients_condition
+VALUES (1, 'Ból reumatyczny')
+GO
+INSERT INTO Patients_condition
+VALUES (2, 'Ból brzucha')
+GO
+INSERT INTO Patients_condition
+VALUES (3, 'Bezsenność')
+GO
+INSERT INTO Patients_medications
+VALUES (1, '1108', '10mg')
+GO
+INSERT INTO Patients_medications
+VALUES (2, '1111', '10mg')
+GO
+INSERT INTO Patients_medications
+VALUES (1, '1193', '10mg')
+GO
+INSERT INTO Patients_medications
+VALUES (3, '1028', '10mg')
+GO
+INSERT INTO Patients_Fees
+VALUES (1, 150)
+GO
+INSERT INTO Patients_Fees
+VALUES (2, 200)
+GO
+INSERT INTO Patients_Fees
+VALUES (1, 270)
+GO
+INSERT INTO Patients_Fees
+VALUES (3, 300)
+GO
+INSERT INTO Hospice_rooms
+VALUES (30, 1, 3 )
+GO
+INSERT INTO Hospice_rooms
+VALUES (40, 2, 4 )
+GO
+INSERT INTO Hospice_rooms
+VALUES (45, 3, 4)
+GO
