@@ -34,7 +34,7 @@ namespace HOSPICE_PROJEKT.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/Pages/Visitors.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("/Pages/LogginNurse.xaml", UriKind.Relative));
         }
     }
 }

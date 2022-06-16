@@ -6,6 +6,7 @@
     <RootNamespace>HOSPICE_PROJEKT</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>HospiceLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
     <Content Include="Images\DeathDate_Selected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="HospiceLogo.ico" />
     <Content Include="Images\HospiceLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
