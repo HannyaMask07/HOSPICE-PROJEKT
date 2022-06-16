@@ -11,8 +11,11 @@
   <ItemGroup>
     <None Remove="Images\DeathDate.png" />
     <None Remove="Images\DeathDate_Selected.png" />
+    <None Remove="Images\HospiceLogo.png" />
     <None Remove="Images\infobutton.png" />
+    <None Remove="Images\MainMenu.png" />
     <None Remove="Images\menu.png" />
+    <None Remove="Images\nurse.png" />
     <None Remove="Images\Patient.png" />
     <None Remove="Images\Patient_Bed.png" />
     <None Remove="Images\Patient_Bed_Selected.png" />
@@ -28,10 +31,19 @@
     <Content Include="Images\DeathDate_Selected.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\HospiceLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\infobutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\MainMenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\menu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nurse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Patient.png">

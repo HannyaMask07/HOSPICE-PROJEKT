@@ -21,7 +21,7 @@
                             </Grid.RowDefinitions>
 
                             <Image Grid.Row="0" Source="{TemplateBinding ImageSource}" Stretch="Uniform" Margin="2"/>
-                            <TextBlock Grid.Row="1" Text="{TemplateBinding Text}" TextAlignment="Center" TextWrapping="Wrap" Margin="2"/>
+                            <TextBlock Grid.Row="1" Text="{TemplateBinding Text}" TextAlignment="Center" TextWrapping="Wrap" Margin="10"/>
                             <Rectangle Name="Line" Grid.RowSpan="2" Fill="Transparent" Stroke="RoyalBlue" StrokeDashArray="1,2" StrokeThickness="0"/>
                         </Grid>
 
@@ -36,4 +36,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    
 </ResourceDictionary>

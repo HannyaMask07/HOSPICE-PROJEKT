@@ -6,15 +6,37 @@
       xmlns:local="clr-namespace:HOSPICE_PROJEKT.Pages"
       xmlns:n="clr-namespace:HOSPICE_PROJEKT"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="MenuOption">
 
-    <Grid Background="White" ButtonBase.Click="Grid_Click">
-        <WrapPanel Margin="5">
-            <n:NavButton Text="Visitor" ImageSource="/Images/Visitors.png" NavUri="/Pages/Visitors.xaml"/>
-            <n:NavButton Text="Patient Info." ImageSource="/Images/Patient.png" NavUri="/Pages/Page1.xaml"/>
-            <n:NavButton Text="Patient Death Date" ImageSource="/Images/DeathDate.png" NavUri="/Pages/DeathDate.xaml"/>
-            <n:NavButton Text="Patient Room" ImageSource="/Images/Patient_Bed.png" NavUri="/Pages/Patient_Beds.xaml"/>
-        </WrapPanel>
+    <Grid Background="AntiqueWhite">
+        <Button Content="Visitors" VerticalContentAlignment="Bottom" Cursor="Hand" FontSize="20" Click="Button_Click" Margin="26,26,432,54">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/Visitors.png" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.70" ScaleY="0.7"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Nurse" VerticalContentAlignment="Bottom" Cursor="Hand" Click="Button_Click_1" Margin="451,26,10,54">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/nurse.png" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.50" ScaleY="0.5"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

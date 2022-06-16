@@ -1,0 +1,68 @@
+﻿<Page x:Class="HOSPICE_PROJEKT.Pages.Visitors_only"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HOSPICE_PROJEKT.Pages"
+      xmlns:n="clr-namespace:HOSPICE_PROJEKT"
+      
+   mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="Visitors">
+
+
+    <Grid Background="AntiqueWhite">
+        <ListView Name="ItemList" Margin="5,20,5,0" Height="195" VerticalAlignment="Top">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Clear" Click="MenuItem_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="50"  DisplayMemberBinding="{Binding VisitId}"/>
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Surname" Width="150" DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="PatientID" Width="150" DisplayMemberBinding="{Binding PatientId}"/>
+                    <GridViewColumn Header="Kinship" Width="150" DisplayMemberBinding="{Binding DegOfKinship}"/>
+                    <GridViewColumn Header="PhoneNr" Width="150" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <CheckBox x:Name="EnableCheckBox" Content="Edit"  HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
+
+        <Grid x:Name="EditGrid" IsEnabled="{Binding ElementName=EnableCheckBox,Path=IsChecked}" Margin="3,260,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <Label Content="Nane" HorizontalAlignment="Left" Margin="3,0,0,0"   VerticalAlignment="Top"/>
+            <Label Content="Surname" HorizontalAlignment="Left" Margin="3,40,0,0"/>
+            <Label Content="PatientID" HorizontalAlignment="Left" Margin="3,80,0,0"/>
+            <Label Content="Deg.of Kinship" HorizontalAlignment="Left" Margin="3,120,0,0"/>
+            <Label Content="Phone Nr" HorizontalAlignment="Left" Margin="3,160,0,0"/>
+            <TextBox Name="NameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Name,Mode=OneWay}" HorizontalAlignment="Left"  Margin="100,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="SurnameTextBox" Text="{Binding ElementName=ItemList, Path=SelectedItem.Surname,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="PatientIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PatientId,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="DegofkinshipTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.DegOfKinship,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,120,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="PhoneNrTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PhoneNumber,Mode=OneWay}" HorizontalAlignment="Left" Margin="100,160,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+
+        </Grid>
+
+        <Button x:Name="CreateButton" HorizontalAlignment="Left" Click="CreateButton_Click" Margin="10,485,0,0" VerticalAlignment="Top" >
+            <StackPanel Orientation="Horizontal">
+                <Path Stretch="Uniform"  Data="M 402.34375 587.59375 C 402.08783 587.59375 401.8515 587.71099 401.65625 587.90625 L 400.78125 588.78125 C 399.66615 588.24854 398.2986 588.42011 397.375 589.34375 L 386.75 599.96875 L 392.40625 605.625 L 403.03125 595 C 403.95495 594.07636 404.12645 592.70888 403.59375 591.59375 L 404.46875 590.71875 C 404.85925 590.32823 404.85925 589.70302 404.46875 589.3125 L 403.0625 587.90625 C 402.86725 587.71099 402.59967 587.59375 402.34375 587.59375 z M 399.46875 590.46875 C 399.72467 590.46875 399.99225 590.58599 400.1875 590.78125 L 401.59375 592.1875 C 401.98435 592.57803 401.98435 593.20322 401.59375 593.59375 L 400.625 594.59375 L 397.78125 591.75 L 398.78125 590.78125 C 398.9765 590.58599 399.21283 590.46875 399.46875 590.46875 z M 395.96875 593.5625 L 398.78125 596.40625 L 392.40625 602.78125 L 389.59375 599.96875 L 395.96875 593.5625 z M 385.9375 600.78125 L 383.8125 608.5625 L 391.59375 606.4375 L 385.9375 600.78125 z " Fill="#FF17314F" Width="15" Height="15" Margin="3,0,0,0"/>
+                <Label Content="Create"/>
+            </StackPanel>
+        </Button>
+
+        <Grid ButtonBase.Click="Grid_Click" Margin="350,450,0,0">
+            <WrapPanel Margin="5">
+                <n:NavButton Text="Visitors" ImageSource="/Images/Visitors_Selected.png" NavUri="/Pages/Visitors.xaml"/>
+                <n:NavButton Text="Menu" ImageSource="/Images/MainMenu.png" NavUri="/Pages/MenuOption.xaml"/>
+            </WrapPanel>
+        </Grid>
+
+        <Image Margin="483,220,93,105" Source="/Images/HospiceLogo.png" Stretch="Uniform" Opacity="0.5" Visibility="Visible"/>
+
+
+
+    </Grid>
+</Page>

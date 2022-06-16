@@ -144,6 +144,17 @@ namespace HOSPICE_PROJEKT
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            var PatientID = Convert.ToInt32(PatientIDText.Text);
+
+            using (HospiceDataBaseContext context = new HospiceDataBaseContext())
+            {
+                PatientsPersonalData = context.PatientsPersonalData.ToList();
+                ItemList.ItemsSource = PatientsPersonalData.Where(x => x.PatientId.Equals(PatientID));
+
+            }
+        }
     }
 }
    

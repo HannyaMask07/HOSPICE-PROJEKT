@@ -26,10 +26,15 @@ namespace HOSPICE_PROJEKT.Pages
             InitializeComponent();
         }
 
-        private void Grid_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
-            NavigationService.Navigate(ClickedButton.NavUri);
+                this.NavigationService.Navigate(new Uri("/Pages/Visitors_only.xaml", UriKind.Relative));
+            
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/Pages/Visitors.xaml", UriKind.Relative));
         }
     }
 }
