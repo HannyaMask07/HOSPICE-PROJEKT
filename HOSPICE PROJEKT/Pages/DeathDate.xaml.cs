@@ -21,6 +21,9 @@ namespace HOSPICE_PROJEKT.Pages
     /// </summary>
     public partial class DeathDate : Page
     {
+        /// <summary>
+        /// Using read class to show data information in datagrid
+        /// </summary>
         public DeathDate()
         {
             InitializeComponent();
@@ -28,6 +31,10 @@ namespace HOSPICE_PROJEKT.Pages
         }
 
         public List<PatientsDeathDate> DatabaseDeathDate { get; private set; }
+
+        /// <summary>
+        /// Class for create button, created patient death date based on what user put inside textboxes
+        /// </summary>
         public void Create()
         {
             try
@@ -61,7 +68,9 @@ namespace HOSPICE_PROJEKT.Pages
 
             }
         }
-
+        /// <summary>
+        /// Class for Read button, Reads every user from database and shows in datagrid
+        /// </summary>
         public void Read()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -70,7 +79,9 @@ namespace HOSPICE_PROJEKT.Pages
                 ItemList.ItemsSource = DatabaseDeathDate;
             }
         }
-
+        /// <summary>
+        /// Class for Update button, Update death date information based on what user put inside texboxes
+        /// </summary>
         public void Update()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -113,7 +124,9 @@ namespace HOSPICE_PROJEKT.Pages
             }
 
         }
-
+        /// <summary>
+        /// Class for delete button, delete information based on what is selected on datagrid or put inside texboxes
+        /// </summary>
         public void Delete()
         {
 
@@ -167,7 +180,9 @@ namespace HOSPICE_PROJEKT.Pages
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
-
+        /// <summary>
+        /// Sort list based on whats inside PatientIDTextbox
+        /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try

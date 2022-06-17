@@ -25,7 +25,9 @@ namespace HOSPICE_PROJEKT
     public partial class Page1 : Page
     {
         public List<PatientsPersonalDatum> PatientsPersonalData { get; private set; }
-
+        /// <summary>
+        /// Using read class to show all the record in datagrid
+        /// </summary>
         public Page1()
         {
             InitializeComponent();
@@ -33,8 +35,10 @@ namespace HOSPICE_PROJEKT
 
         }
 
-       
 
+        /// <summary>
+        /// Class for create button, created information about patients personal data based on what user put inside textboxes
+        /// </summary>
         public void Create()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -87,7 +91,9 @@ namespace HOSPICE_PROJEKT
                 }
             }
         }
-
+        /// <summary>
+        /// Class for read button, shows data form database in datagrid
+        /// </summary>
         public void Read()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -96,7 +102,9 @@ namespace HOSPICE_PROJEKT
                 ItemList.ItemsSource = PatientsPersonalData;
             }
         }
-
+        /// <summary>
+        /// Class for updat button, updated information about patients rooms is based on what user put inside textboxes
+        /// </summary>
         public void Update()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -160,7 +168,9 @@ namespace HOSPICE_PROJEKT
             }
 
         }
-
+        /// <summary>
+        /// Class for delete button
+        /// </summary>
         public void Delete()
         {
 
@@ -220,6 +230,9 @@ namespace HOSPICE_PROJEKT
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
+        /// <summary>
+        /// Sort list based on whats inside PatientIDTextbox
+        /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try

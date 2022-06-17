@@ -25,13 +25,21 @@ namespace HOSPICE_PROJEKT.Pages
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Navigation button to change destination to the one inside Uri
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
                 this.NavigationService.Navigate(new Uri("/Pages/Visitors_only.xaml", UriKind.Relative));
             
         }
-
+        /// <summary>
+        /// Navigation button to change destination to the one inside Uri
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/Pages/LogginNurse.xaml", UriKind.Relative));

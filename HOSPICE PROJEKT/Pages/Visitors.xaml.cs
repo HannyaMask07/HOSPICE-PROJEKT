@@ -147,6 +147,7 @@ namespace HOSPICE_PROJEKT.Pages
         /// <summary>
         /// Class for deletebutton, delets user from database based on datagrid click or puted information
         /// </summary>
+        /// 
         public void Delete()
         {
 
@@ -206,7 +207,9 @@ namespace HOSPICE_PROJEKT.Pages
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
-
+        /// <summary>
+        /// Sort list based on whats inside PatientIDTextbox
+        /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try

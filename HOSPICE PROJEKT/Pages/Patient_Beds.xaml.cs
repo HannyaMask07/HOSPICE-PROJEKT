@@ -21,13 +21,19 @@ namespace HOSPICE_PROJEKT.Pages
     public partial class PatientBeds : Page
     {
         public List<HospiceRoom> HospiceRoomsList { get; private set; }
-
+        /// <summary>
+        /// Using read class to show all the record in datagrid
+        /// </summary>
         public PatientBeds()
         {
             InitializeComponent();
             Read();
         }
 
+
+        /// <summary>
+        /// Class for create button, created information about patients rooms is based on what user put inside textboxes
+        /// </summary>
         public void Create()
         {
             try
@@ -81,6 +87,9 @@ namespace HOSPICE_PROJEKT.Pages
             }
         }
 
+        /// <summary>
+        /// Class for read button, shows data form database in datagrid
+        /// </summary>
         public void Read()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -89,7 +98,9 @@ namespace HOSPICE_PROJEKT.Pages
                 ItemList.ItemsSource = HospiceRoomsList;
             }
         }
-
+        /// <summary>
+        /// Class for updat button, updated information about patients rooms is based on what user put inside textboxes
+        /// </summary>
         public void Update()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -147,7 +158,9 @@ namespace HOSPICE_PROJEKT.Pages
             }
 
         }
-
+        /// <summary>
+        /// Class for delete button
+        /// </summary>
         public void Delete()
         {
 
@@ -201,7 +214,9 @@ namespace HOSPICE_PROJEKT.Pages
             var ClickedButton = e.OriginalSource as NavButton;
             NavigationService.Navigate(ClickedButton.NavUri);
         }
-
+        /// <summary>
+        /// Sort list based on whats inside PatientIDTextbox
+        /// </summary>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try
