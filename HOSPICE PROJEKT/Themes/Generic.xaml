@@ -4,7 +4,6 @@
     xmlns:local="clr-namespace:HOSPICE_PROJEKT"
     >
 
-
     <Style TargetType="{x:Type local:NavButton}">
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Template">

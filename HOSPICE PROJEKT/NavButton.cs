@@ -16,6 +16,10 @@ using System.Windows.Shapes;
 
 namespace HOSPICE_PROJEKT
 {
+    /// <summary>
+    /// NavButton that is made for easier implementation
+    /// I took this idea from some youtube tutorial of navigation trough pages in WPF
+    /// </summary>
     public class NavButton : ButtonBase
     {
         static NavButton()

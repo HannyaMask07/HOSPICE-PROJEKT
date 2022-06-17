@@ -20,6 +20,9 @@ namespace HOSPICE_PROJEKT.Pages
     /// </summary>
     public partial class Visitors : Page
     {
+        /// <summary>
+        /// Read data from databse to show in datagrid
+        /// </summary>
         public Visitors()
         {
             InitializeComponent();
@@ -27,6 +30,10 @@ namespace HOSPICE_PROJEKT.Pages
         }
         public List<VisitorsDatum> DatabaseVisitors { get; private set; }
 
+            
+        /// <summary>
+        /// Class for create button, created visitor is based on what user put inside textboxes
+        /// </summary>
         public void Create()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -79,7 +86,9 @@ namespace HOSPICE_PROJEKT.Pages
             }
             
         }
-
+        /// <summary>
+        /// Class for Read button, Reads every user from database and shows in datagrid
+        /// </summary>
         public void Read()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -88,7 +97,9 @@ namespace HOSPICE_PROJEKT.Pages
                 ItemList.ItemsSource = DatabaseVisitors;
             }
         }
-
+        /// <summary>
+        /// Class for Update button, Update users infromation based on what user put inside texboxes
+        /// </summary>
         public void Update()
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
@@ -133,7 +144,9 @@ namespace HOSPICE_PROJEKT.Pages
             }
 
         }
-
+        /// <summary>
+        /// Class for deletebutton, delets user from database based on datagrid click or puted information
+        /// </summary>
         public void Delete()
         {
 
@@ -182,6 +195,12 @@ namespace HOSPICE_PROJEKT.Pages
             ItemList.Items.Clear();
         }
 
+        /// <summary>
+        /// I made navButton class to better navigate trough pages
+        /// it can be easly modifide
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var ClickedButton = e.OriginalSource as NavButton;

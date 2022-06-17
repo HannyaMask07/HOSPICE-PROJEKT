@@ -25,7 +25,13 @@ namespace HOSPICE_PROJEKT.Pages
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// When clicked it changes page to Visitors
+        /// In if with login textbox and password information can be added
+        /// catching when passowrd or login is empty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -38,7 +44,7 @@ namespace HOSPICE_PROJEKT.Pages
                 return;
             }
             string password = Convert.ToString(PasswordTextBox);
-            if (LoginTextBox.Text != "" && password != "")
+            if (LoginTextBox.Text != "" && password != "" )
             {
                 this.NavigationService.Navigate(new Uri("/Pages/Visitors.xaml", UriKind.Relative));
             }

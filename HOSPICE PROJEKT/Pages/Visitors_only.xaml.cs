@@ -17,6 +17,8 @@ namespace HOSPICE_PROJEKT.Pages
 {
     /// <summary>
     /// Logika interakcji dla klasy Visitors_only.xaml
+    /// Visitors can't change any informations of other visiotrs, they can only add themslefs
+    /// Made catches for same things as in visitors page but only for create button and search option
     /// </summary>
     public partial class Visitors_only : Page
     {
@@ -26,8 +28,14 @@ namespace HOSPICE_PROJEKT.Pages
 
         }
 
+        /// <summary>
+        /// List that will be seen in datagrid
+        /// </summary>
         public List<VisitorsDatum> DatabaseVisitors { get; private set; }
 
+        /// <summary>
+        /// Class that creates visitor based on information he/she put inside texboxes
+        /// </summary>
         public void Create()
         {
             try
@@ -79,6 +87,10 @@ namespace HOSPICE_PROJEKT.Pages
             }
         }
 
+        /// <summary>
+        /// Class that reads only current visitor, so he can't se othres information. Shown visitor is based
+        /// on his phone numbers
+        /// </summary>
         public void Read()
         {
             var phonenumber = PhoneNrTextBox.Text;
