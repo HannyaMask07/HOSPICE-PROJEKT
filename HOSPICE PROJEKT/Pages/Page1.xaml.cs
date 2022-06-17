@@ -168,17 +168,24 @@ namespace HOSPICE_PROJEKT
             {
                 PatientsPersonalDatum selectedPatient = (PatientsPersonalDatum)ItemList.SelectedItem;
 
-                if (selectedPatient != null)
+                try
                 {
-                    PatientsPersonalDatum? patient = context.PatientsPersonalData.Find(selectedPatient.PatientId);
+                    if (selectedPatient != null)
+                    {
+                        PatientsPersonalDatum? patient = context.PatientsPersonalData.Find(selectedPatient.PatientId);
 
 
-                    context.Remove(patient);
-                    context.SaveChanges();
-                    Read();
+                        context.Remove(patient);
+                        context.SaveChanges();
+                        Read();
 
+                    }
                 }
-
+                catch
+                {
+                    MessageBox.Show("You cant delete this patient information because he is connected to diffrent tables");
+                    return;
+                }
 
             }
 
