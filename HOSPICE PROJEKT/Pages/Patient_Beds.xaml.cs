@@ -30,15 +30,52 @@ namespace HOSPICE_PROJEKT.Pages
 
         public void Create()
         {
+            try
+            {
+                int patientIds = Int32.Parse(BedIdTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("BedId must be a valid integer value.");
+                return;
+            }
+            try
+            {
+                int patientIds = Int32.Parse(PatientIdTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
+            try
+            {
+                int patientIds = Int32.Parse(RoomNrTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("RoomNr must be a valid integer value.");
+                return;
+            }
+
+
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
                 var bedId = int.Parse(BedIdTextBox.Text);
                 var patientId = int.Parse(PatientIdTextBox.Text);
                 var roomNr = int.Parse(RoomNrTextBox.Text);
 
-                context.HospiceRooms.Add(new HospiceRoom() { BedId = (short)bedId, PatientId = patientId, RoomNr = (short)roomNr }); ;
-                context.SaveChanges();
-                Read();
+                try
+                {
+                    context.HospiceRooms.Add(new HospiceRoom() { BedId = (short)bedId, PatientId = patientId, RoomNr = (short)roomNr }); ;
+                    context.SaveChanges();
+                    Read();
+                }
+                catch
+                {
+                    MessageBox.Show("Can't create (Probably patient is arleady signed to another bed)");
+                    return;
+                }
 
 
             }
@@ -57,7 +94,33 @@ namespace HOSPICE_PROJEKT.Pages
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-
+                try
+                {
+                    int patientIds = Int32.Parse(BedIdTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("BedId must be a valid integer value.");
+                    return;
+                }
+                try
+                {
+                    int patientIds = Int32.Parse(PatientIdTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PatientID must be a valid integer value.");
+                    return;
+                }
+                try
+                {
+                    int patientIds = Int32.Parse(RoomNrTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("RoomNr must be a valid integer value.");
+                    return;
+                }
                 HospiceRoom selectedBed = ItemList.SelectedItem as HospiceRoom;
 
                 var bedId = int.Parse(BedIdTextBox.Text);
@@ -65,15 +128,21 @@ namespace HOSPICE_PROJEKT.Pages
                 var roomNr = int.Parse(RoomNrTextBox.Text);
 
                     HospiceRoom? bed = context.HospiceRooms.Find(selectedBed.BedId);
-
+                try
+                {
                     bed.BedId = (short)bedId;
                     bed.PatientId = patientId;
                     bed.RoomNr = (short)roomNr;
 
                     context.SaveChanges();
                     Read();
+                }
+                catch
+                {
+                    MessageBox.Show("Can't create (Probably patient is arleady signed to another bed)");
+                    return;
+                }
 
-                
 
             }
 
@@ -135,12 +204,28 @@ namespace HOSPICE_PROJEKT.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Convert.ToInt32(PatientIDText.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
             var PatientID = Convert.ToInt32(PatientIDText.Text);
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
+                try { 
                 HospiceRoomsList = context.HospiceRooms.ToList();
                 ItemList.ItemsSource = HospiceRoomsList.Where(x => x.PatientId.Equals(PatientID));
+                }
+                catch
+                {
+                    MessageBox.Show("error");
+                    return;
+                }
 
             }
         }

@@ -31,20 +31,53 @@ namespace HOSPICE_PROJEKT.Pages
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
+                try
+                {
+                    int patientIds = Int32.Parse(PatientIDTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PatientID must be a valid integer value.");
+                    return;
+                }
+
+                try
+                {
+                    int phonen = Int32.Parse(PhoneNrTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Phone number can't have characters.");
+                    return;
+                }
+
+                if (PhoneNrTextBox.Text.Length != 9)
+                {
+                    MessageBox.Show("Phone number has to be 9 digits");
+                    return;
+                }
+
                 var name = NameTextBox.Text;
                 var surname = SurnameTextBox.Text;
-                int patientId = Convert.ToInt32(PatientIDTextBox.Text);
+                var patientID = int.Parse(PatientIDTextBox.Text);
                 var degofkinship = DegofkinshipTextBox.Text;
                 var phonenumber = PhoneNrTextBox.Text;
 
-                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+
+                if (name != "" && surname != "" && degofkinship != "" && phonenumber != "")
                 {
-                    context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientId, PhoneNumber = phonenumber });
+                    context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientID, PhoneNumber = phonenumber });
                     context.SaveChanges();
                     Read();
                 }
+                else
+                {
+                    MessageBox.Show("Every information is needed.");
+                    return;
+                }
 
             }
+            
         }
 
         public void Read()
@@ -63,13 +96,24 @@ namespace HOSPICE_PROJEKT.Pages
 
                 VisitorsDatum selectedVisitor = ItemList.SelectedItem as VisitorsDatum;
 
+                try
+                {
+                    int patientIds = Int32.Parse(PatientIDTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PatientID must be a valid integer value.");
+                    return;
+                }
+
                 var name = NameTextBox.Text;
                 var surname = SurnameTextBox.Text;
                 int patientId = Convert.ToInt32(PatientIDTextBox.Text);
                 var degofkinship = DegofkinshipTextBox.Text;
                 var phonenumber = PhoneNrTextBox.Text;
 
-                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+
+                if (name != "" && surname != "" && degofkinship != "" && phonenumber != "")
                 {
                     VisitorsDatum? visitor = context.VisitorsData.Find(selectedVisitor.VisitId);
 
@@ -80,9 +124,12 @@ namespace HOSPICE_PROJEKT.Pages
                     visitor.PhoneNumber = phonenumber;
                     context.SaveChanges();
                     Read();
-
                 }
-
+                else
+                {
+                    MessageBox.Show("Every information is needed.");
+                    return;
+                }
             }
 
         }
@@ -143,13 +190,29 @@ namespace HOSPICE_PROJEKT.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var PatientIDTEST = Convert.ToInt32(PatientIDText.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
             var PatientID = Convert.ToInt32(PatientIDText.Text);
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
-
-                DatabaseVisitors = context.VisitorsData.ToList();
-                ItemList.ItemsSource = DatabaseVisitors.Where(x => x.PatientId.Equals(PatientID));
+                try
+                {
+                    DatabaseVisitors = context.VisitorsData.ToList();
+                    ItemList.ItemsSource = DatabaseVisitors.Where(x => x.PatientId.Equals(PatientID));
+                }
+                catch
+                {
+                    MessageBox.Show("error");
+                    return;
+                }
 
             }
         }

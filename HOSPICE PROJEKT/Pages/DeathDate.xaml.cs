@@ -30,6 +30,16 @@ namespace HOSPICE_PROJEKT.Pages
         public List<PatientsDeathDate> DatabaseDeathDate { get; private set; }
         public void Create()
         {
+            try
+            {
+                Int32.Parse(PatientIdTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
+
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
                 var patientID = int.Parse(PatientIdTextBox.Text);
@@ -37,11 +47,16 @@ namespace HOSPICE_PROJEKT.Pages
                 var causeOfDeath = CauseOfDeathTextBox.Text; 
                 
 
-                if (deathDate != null && causeOfDeath != null)
+                if (deathDate != null && causeOfDeath != "")
                 {
                     context.PatientsDeathDates.Add(new PatientsDeathDate() { PatientId = patientID, DeathDate = (DateTime)deathDate, CauseOfDeath = causeOfDeath  }); ;
                     context.SaveChanges();
                     Read();
+                }
+                else
+                {
+                    MessageBox.Show("Every information is needed.");
+                    return;
                 }
 
             }
@@ -61,13 +76,23 @@ namespace HOSPICE_PROJEKT.Pages
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
 
+                try
+                {
+                    Int32.Parse(PatientIdTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PatientID must be a valid integer value.");
+                    return;
+                }
+
                 PatientsDeathDate selectedPatient = ItemList.SelectedItem as PatientsDeathDate;
 
                 var patientID = int.Parse(PatientIdTextBox.Text);
                 var deathDate = DeathDateTextBox.SelectedDate;
                 var causeOfDeath = CauseOfDeathTextBox.Text;
 
-                if (deathDate != null && causeOfDeath != null)
+                if (deathDate != null && causeOfDeath != "")
                 {
                     PatientsDeathDate? patient = context.PatientsDeathDates.Find(selectedPatient.PatientId);
 
@@ -78,6 +103,11 @@ namespace HOSPICE_PROJEKT.Pages
                     context.SaveChanges();
                     Read();
 
+                }
+                else
+                {
+                    MessageBox.Show("Every information is needed.");
+                    return;
                 }
 
             }
@@ -140,15 +170,35 @@ namespace HOSPICE_PROJEKT.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                var PatientIDTEST = Convert.ToInt32(PatientIDText.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
+
             var PatientID = Convert.ToInt32(PatientIDText.Text);
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
-            {
-                DatabaseDeathDate = context.PatientsDeathDates.ToList();
-                ItemList.ItemsSource = DatabaseDeathDate.Where(x => x.PatientId.Equals(PatientID));
 
-            }
+                try
+                {
+                    DatabaseDeathDate = context.PatientsDeathDates.ToList();
+                    ItemList.ItemsSource = DatabaseDeathDate.Where(x => x.PatientId.Equals(PatientID));
+
+                }
+                catch
+                {
+                    MessageBox.Show("Error.");
+                    return;
+                }
+
+
         }
+        
 
     }
 }

@@ -39,18 +39,52 @@ namespace HOSPICE_PROJEKT
         {
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
+                try
+                {
+                    Int32.Parse(PhoneNrTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PhoneNr can't contain letters.");
+                    return;
+                }
+
+                if (PhoneNrTextBox.Text.Length != 0)
+                {
+                    if (PhoneNrTextBox.Text.Length != 9)
+                    {
+                        MessageBox.Show("PhoneNr mus have 9 digits.");
+                        return;
+                    }
+
+                }
+
+                if (PeselTextBox.Text.Length != 0)
+                {
+                    if (PeselTextBox.Text.Length != 11)
+                    {
+                        MessageBox.Show("Pesel must have 11 digits.");
+                        return;
+                    }
+                }
+
+
                 var name = NameTextBox.Text;
                 var surname = SurnameTextBox.Text;
-                int pesel = int.Parse(PeselTextBox.Text);
+                var pesel = PeselTextBox.Text;
                 var phonenumber = PhoneNrTextBox.Text;
 
-                if (name != null && surname != null)
+                if (name != "" && surname != "")
                 {
-                    context.PatientsPersonalData.Add(new PatientsPersonalDatum() { Name = name, Surname = surname, PhoneNumber = phonenumber });
+                    context.PatientsPersonalData.Add(new PatientsPersonalDatum() { Name = name, Surname = surname, PhoneNumber = phonenumber, Pesel = pesel});
                     context.SaveChanges();
                     Read();
                 }
-
+                else
+                {
+                    MessageBox.Show("Please check if all needed informations are provided");
+                    return;
+                }
             }
         }
 
@@ -70,12 +104,42 @@ namespace HOSPICE_PROJEKT
 
                 PatientsPersonalDatum selectedPatient = ItemList.SelectedItem as PatientsPersonalDatum;
 
+                try
+                {
+                    Int32.Parse(PhoneNrTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("PhoneNr can't contain letters.");
+                    return;
+                }
+
+                if (PhoneNrTextBox.Text.Length != 0)
+                {
+                    if (PhoneNrTextBox.Text.Length != 9)
+                    {
+                        MessageBox.Show("PhoneNr mus have 9 digits.");
+                        return;
+                    }
+
+                }
+
+                if (PeselTextBox.Text.Length != 0)
+                {
+                    if (PeselTextBox.Text.Length != 11)
+                    {
+                        MessageBox.Show("Pesel must have 11 digits.");
+                        return;
+                    }
+                }
+
+
                 var name = NameTextBox.Text;
                 var surname = SurnameTextBox.Text;
-                string pesel = PeselTextBox.Text;
+                var pesel = PeselTextBox.Text;
                 var phonenumber = PhoneNrTextBox.Text;
 
-                if (name != null && surname != null && phonenumber != null)
+                if (name != "" && surname != "")
                 {
                     PatientsPersonalDatum? patient = context.PatientsPersonalData.Find(selectedPatient.PatientId);
 
@@ -86,6 +150,11 @@ namespace HOSPICE_PROJEKT
                     context.SaveChanges();
                     Read();
 
+                }
+                else
+                {
+                    MessageBox.Show("Please check if all needed informations are provided");
+                    return;
                 }
 
             }
@@ -146,6 +215,15 @@ namespace HOSPICE_PROJEKT
         }
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Convert.ToInt32(PatientIDText.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
             var PatientID = Convert.ToInt32(PatientIDText.Text);
 
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())

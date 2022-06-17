@@ -30,6 +30,32 @@ namespace HOSPICE_PROJEKT.Pages
 
         public void Create()
         {
+            try
+            {
+                int patientIds = Int32.Parse(PatientIDTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("PatientID must be a valid integer value.");
+                return;
+            }
+
+            try
+            {
+                int phonen = Int32.Parse(PhoneNrTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Phone number can't have characters.");
+                return;
+            }
+
+            if (PhoneNrTextBox.Text.Length != 9)
+            {
+                MessageBox.Show("Phone number has to be 9 digits");
+                return;
+            }
+
             using (HospiceDataBaseContext context = new HospiceDataBaseContext())
             {
                 var name = NameTextBox.Text;
@@ -38,11 +64,16 @@ namespace HOSPICE_PROJEKT.Pages
                 var degofkinship = DegofkinshipTextBox.Text;
                 var phonenumber = PhoneNrTextBox.Text;
 
-                if (name != null && surname != null && patientId != null && degofkinship != null && phonenumber != null)
+                if (name != "" && surname != "" && degofkinship != "" && phonenumber != "")
                 {
                     context.VisitorsData.Add(new VisitorsDatum() { Name = name, Surname = surname, DegOfKinship = degofkinship, PatientId = patientId, PhoneNumber = phonenumber });
                     context.SaveChanges();
                     Read();
+                }
+                else
+                {
+                    MessageBox.Show("Every information is needed.");
+                    return;
                 }
 
             }
